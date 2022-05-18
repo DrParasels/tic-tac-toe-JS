@@ -29,6 +29,7 @@ body {
 
 .btn-option {
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
   border: none;
   border-radius: 8px;
   height: 22vmin;
