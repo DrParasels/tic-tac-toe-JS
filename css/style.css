@@ -2,5 +2,82 @@
 *::after,
 *::before{
   box-sizing: border-box;
+  font-family: "Radio Canada", sans-serif;
 }
 
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #08AEEA, #14DAC9);
+  font-size: 16px;
+}
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.container {
+  width: 70vmin;
+  height: 70vmin;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 2vmin;
+}
+
+.btn-option {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 8px;
+  height: 22vmin;
+  width: 22vmin;
+  color: #1f4a5a;
+  font-size: 12vmin;
+}
+
+.restart {
+  padding: 1em 2em;
+  border-radius: 8px;
+  background-color: #0a0027;
+  color: #ffffff;
+  border: none;
+  position: relative;
+  margin: 1.5em auto 0 auto;
+  display: block;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.popup {
+  background: linear-gradient(135deg, #08AEEA, #14DAC9);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+  font-size: 12vmin;
+}
+
+.popup.hide {
+  display: none;
+}
+
+.new-game {
+  font-size: 0.6em;
+  padding: 0.5em 1em;
+  background-color: #0a0027;
+  color: #ffffff;
+  border-radius: 0.2em;
+  border: none;
+}
+
+.message {
+  color: #ffffff;
+  text-align: center;
+  font-size: 1em;
+}
