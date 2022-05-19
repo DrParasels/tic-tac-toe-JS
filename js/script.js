@@ -2,7 +2,7 @@ let btnBoard = document.querySelectorAll('.btn-option'),
     btnRestart = document.querySelector('.restart'),
     btnNewGame = document.querySelector('.new-game'),
     popupScreen = document.querySelector('.popup'),
-    messageText = document.querySelector('.message'),
+    messageText = document.querySelector('.message');
     winArray = [
       [0,1,2],
       [0,3,6],
@@ -14,7 +14,10 @@ let btnBoard = document.querySelectorAll('.btn-option'),
       [2,4,6]
     ],
     counter = 0,
-    flagX = true;
+    flagX = true,
+    xWins = 0,
+    oWins = 0,
+    draw = 0;
 
 //function when game end
 const endGame = () => {
@@ -28,6 +31,8 @@ const endGame = () => {
 const drawFunction = () => {
   endGame();
   messageText.innerHTML = "&#x1F60E; <br> Ничья!";
+  draw++;
+  document.querySelector('.score-draw').textContent = "Draw: " + draw;
 }
 
 // function if player win
@@ -35,9 +40,13 @@ const winFunction = (letter) => {
   endGame();
   if (letter == 'X') {
     messageText.innerHTML = "&#x1F389; <br> X Победил";
+    xWins++;
+    document.querySelector('.score-winX').textContent = "X wins: " + xWins;
   }
   else {
     messageText.innerHTML = "&#x1F389; <br> O Победил";
+    oWins++;
+    document.querySelector('.score-winO').textContent = "O wins: " + oWins;
   }
 }
 
