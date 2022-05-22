@@ -21,11 +21,12 @@ let btnBoard = document.querySelectorAll('.btn-option'),
 
 //function when game end
 const endGame = () => {
-  popupScreen.classList.remove('hide');
+  popupScreen.style.transform = 'translateY(0)';
   btnBoard.forEach(element => {
     element.disabled = true;
   });
 }
+
 
 //function if 'Ничья'
 const drawFunction = () => {
@@ -37,7 +38,13 @@ const drawFunction = () => {
 
 // function if player win
 const winFunction = (letter) => {
-  endGame();
+  btnBoard[item[0]].classList.add('win-btn');
+  btnBoard[item[1]].classList.add('win-btn');
+  btnBoard[item[2]].classList.add('win-btn');
+  btnBoard.forEach(element => {
+    element.disabled = true;
+  });
+  setTimeout(endGame, 1000);
   if (letter == 'X') {
     messageText.innerHTML = "&#x1F389; <br> X Победил";
     xWins++;
@@ -53,9 +60,10 @@ const winFunction = (letter) => {
 //functions for restart and play again
 const enableButtons = () => {
   btnBoard.forEach(element => {
+    element.classList.remove('win-btn');
     element.disabled = false;
     element.textContent = '';
-    popupScreen.classList.add('hide');
+    popupScreen.style.transform = "translateY(-200%)";
   });
 }
 
@@ -101,9 +109,12 @@ const findWinner = () => {
     if (element1 != '' && element2 != '' && element3 != '') {
       if (element1 === element2 && element2 === element3) {
         winFunction(element1);
+       
       }
     }
   }
 };
 
 window.onload = enableButtons;
+
+

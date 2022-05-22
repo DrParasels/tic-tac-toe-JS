@@ -52,6 +52,8 @@ body {
   width: 22vmin;
   color: #1f4a5a;
   font-size: 12vmin;
+  transform: scale(1);
+  transition: all 0.3s;
 }
 
 .restart {
@@ -78,10 +80,8 @@ body {
   flex-direction: column;
   gap: 1em;
   font-size: 12vmin;
-}
-
-.popup.hide {
-  display: none;
+  transform: translateY(-200%);
+  transition: 0.3s;
 }
 
 .new-game {
@@ -97,4 +97,9 @@ body {
   color: #ffffff;
   text-align: center;
   font-size: 1em;
+}
+
+.win-btn {
+  transform: scale(1.05);
+  background-color: #93ebe3;
 }
