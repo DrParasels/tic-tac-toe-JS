@@ -162,7 +162,7 @@ btnBoard.forEach((element) => {
       element.disabled = true;
     }
     counter++;
-    if (counter === btnBoard.length) {
+    if (counter === btnBoard.length**2) {
       drawFunction();
     }
     findWinner(winArr);
