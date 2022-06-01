@@ -23,7 +23,7 @@ body {
   width: 70vmin;
   height: 70vmin;
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(4,1fr);
   grid-gap: 2vmin;
 }
 
@@ -48,8 +48,8 @@ body {
   background-color: #fff;
   border: none;
   border-radius: 8px;
-  height: 22vmin;
-  width: 22vmin;
+  height: 15vmin;
+  width: 15vmin;
   color: #1f4a5a;
   font-size: 12vmin;
   transform: scale(1);
