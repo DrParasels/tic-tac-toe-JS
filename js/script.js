@@ -10,7 +10,6 @@ let btnBoard = document.querySelectorAll('.btn-option'),
   draw = 0,
   sizeBoard = 4;
 
-
 //function get rows
 const getRows = (arr) => {
   let rows = [];
@@ -163,7 +162,7 @@ btnBoard.forEach((element) => {
       element.disabled = true;
     }
     counter++;
-    if (counter === 9) {
+    if (counter === btnBoard.length) {
       drawFunction();
     }
     findWinner(winArr);
