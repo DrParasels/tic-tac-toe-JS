@@ -21,10 +21,8 @@ valueSelect.addEventListener("change", () => {
 
 //function get параметры
 
-function getParam ()
 let sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
 newField(sizeBoard);
-
 rows = getRows(btnBoard);
 cols = getColumns(btnBoard);
 diag1 = getDiagonals1(rows);
