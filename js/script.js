@@ -21,13 +21,7 @@ valueSelect.addEventListener("change", () => {
 
 //function get параметры
 
-let sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
-newField(sizeBoard);
-rows = getRows(btnBoard);
-cols = getColumns(btnBoard);
-diag1 = getDiagonals1(rows);
-diag2 = getDiagonals2(rows);
-winArr = rows.concat(cols, diag1, diag2);
+
 
 
 
@@ -45,7 +39,13 @@ function newField(size) {
   }
 }
 
-
+let sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
+newField(sizeBoard);
+rows = getRows(btnBoard);
+cols = getColumns(btnBoard);
+diag1 = getDiagonals1(rows);
+diag2 = getDiagonals2(rows);
+winArr = rows.concat(cols, diag1, diag2);
 //function get rows
 function getRows(arr) {
   let rows = [];
