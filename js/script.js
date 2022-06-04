@@ -1,17 +1,55 @@
-let btnBoard = document.querySelectorAll('.btn-option'),
+let valueSelect = document.getElementById("fieldsize"),
   btnRestart = document.querySelector('.restart'),
   btnNewGame = document.querySelector('.new-game'),
   popupScreen = document.querySelector('.popup'),
-  messageText = document.querySelector('.message');
+  messageText = document.querySelector('.message'),
   counter = 0,
   flagX = true,
   xWins = 0,
   oWins = 0,
-  draw = 0,
-  sizeBoard = 4;
+  draw = 0;
+
+//function get value in select
+
+
+valueSelect.addEventListener("change", () => {
+  sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
+  newField(sizeBoard);
+  btnBoard = document.querySelectorAll('.btn-option');
+});
+
+
+//function get параметры
+
+function getParam ()
+let sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
+newField(sizeBoard);
+
+rows = getRows(btnBoard);
+cols = getColumns(btnBoard);
+diag1 = getDiagonals1(rows);
+diag2 = getDiagonals2(rows);
+winArr = rows.concat(cols, diag1, diag2);
+
+
+
+
+//function create field
+function newField(size) {
+  document.querySelector('.container').innerHTML = '<button class="btn-option"></button>'.repeat(size * size);
+  document.querySelector('.container').style.gridTemplateColumns = `repeat(${sizeBoard},1fr)`;
+  document.querySelector('.container').style.gridGap = `${1}vmin`;
+  btnBoard = document.querySelectorAll('.btn-option');
+  for (i = 0; i < btnBoard.length; i++) {
+    btnBoard[i].style.width = `${6}vmin`;
+    btnBoard[i].style.height = `${6}vmin`;
+    btnBoard[i].style.fontSize = `${5}vmin`;
+  }
+}
+
 
 //function get rows
-const getRows = (arr) => {
+function getRows(arr) {
   let rows = [];
   for (let i = 0; i < sizeBoard; i++) {
     rows[i] = [];
@@ -23,7 +61,7 @@ const getRows = (arr) => {
 }
 
 //function get columns
-const getColumns = (arr) => {
+function getColumns(arr) {
   let cols = [];
   for (let i = 0; i < sizeBoard; i++) {
     cols[i] = [];
@@ -34,11 +72,10 @@ const getColumns = (arr) => {
   return cols;
 }
 
-rows = getRows(btnBoard);
-cols = getColumns(btnBoard);
+
 
 //function get diagonal
-const getDiagonals1 = (arr) => {
+function getDiagonals1(arr) {
   let result = [];
   for (i = 0; i < arr.length; i++) {
     for (var j = 0; j < arr[i].length; j++) {
@@ -51,9 +88,9 @@ const getDiagonals1 = (arr) => {
   return result;
 }
 
-let diag1 = getDiagonals1(rows);
 
-const reverseSubArrs = (arr) => {
+
+function reverseSubArrs(arr) {
   let result = [];
   for (var i = 0; i < arr.length; i++) {
     for (var j = arr[i].length - 1; j >= 0; j--) {
@@ -66,14 +103,9 @@ const reverseSubArrs = (arr) => {
   return result;
 }
 
-const getDiagonals2 = (arr) => {
+function getDiagonals2(arr) {
   return getDiagonals1(reverseSubArrs(arr));
 }
-
-let diag2 = getDiagonals2(rows);
-
-let winArr = rows.concat(cols, diag1, diag2);
-
 
 function findWinner(winArr) {
   for (var i = 0; i < winArr.length; i++) {
@@ -85,7 +117,7 @@ function findWinner(winArr) {
           winArr[i][j - 2].innerText === winArr[i][j - 1].innerText &&
           winArr[i][j - 1].innerText === winArr[i][j].innerText
         ) {
-          winFunction(winArr[i][j].innerText,i,j);
+          winFunction(winArr[i][j].innerText, i, j);
         }
       }
     }
@@ -109,7 +141,7 @@ const drawFunction = () => {
 }
 
 // function if player win
-const winFunction = (letter,i,j) => {
+const winFunction = (letter, i, j) => {
   winArr[i][j - 2].classList.add('win-btn');
   winArr[i][j - 1].classList.add('win-btn');
   winArr[i][j].classList.add('win-btn');
@@ -121,8 +153,7 @@ const winFunction = (letter,i,j) => {
     messageText.innerHTML = "&#x1F389; <br> X Победил";
     xWins++;
     document.querySelector('.score-winX').textContent = "X wins: " + xWins;
-  }
-  else {
+  } else {
     messageText.innerHTML = "&#x1F389; <br> O Победил";
     oWins++;
     document.querySelector('.score-winO').textContent = "O wins: " + oWins;
@@ -151,6 +182,7 @@ btnNewGame.addEventListener('click', () => {
 
 
 btnBoard.forEach((element) => {
+  console.log(element)
   element.addEventListener('click', () => {
     if (flagX) {
       flagX = false;
@@ -162,7 +194,7 @@ btnBoard.forEach((element) => {
       element.disabled = true;
     }
     counter++;
-    if (counter === btnBoard.length**2) {
+    if (counter === btnBoard.length) {
       drawFunction();
     }
     findWinner(winArr);
