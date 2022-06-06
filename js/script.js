@@ -1,4 +1,4 @@
-let valueSelect = document.getElementById("fieldsize"),
+let valueSelect = document.getElementById('fieldsize'),
   btnRestart = document.querySelector('.restart'),
   btnNewGame = document.querySelector('.new-game'),
   popupScreen = document.querySelector('.popup'),
@@ -7,45 +7,52 @@ let valueSelect = document.getElementById("fieldsize"),
   flagX = true,
   xWins = 0,
   oWins = 0,
-  draw = 0;
+  draw = 0,
+  flag = false;
 
 //function get value in select
 
+if (flag === false) {
+  sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
+  btnBoard = document.querySelectorAll('.btn-option');
+  newField(sizeBoard);
+  rows = getRows(btnBoard);
+  cols = getColumns(btnBoard);
+  diag1 = getDiagonals1(rows);
+  diag2 = getDiagonals2(rows);
+  winArr = rows.concat(cols, diag1, diag2);
+  move();
+  flag = true;
+}
 
 valueSelect.addEventListener("change", () => {
   sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
-  newField(sizeBoard);
   btnBoard = document.querySelectorAll('.btn-option');
+  console.log(btnBoard);
+  newField(sizeBoard);
+  rows = getRows(btnBoard);
+  cols = getColumns(btnBoard);
+  diag1 = getDiagonals1(rows);
+  diag2 = getDiagonals2(rows);
+  winArr = rows.concat(cols, diag1, diag2);
+  move();
 });
-
-
-//function get параметры
-
-
-
-
-
 
 //function create field
 function newField(size) {
   document.querySelector('.container').innerHTML = '<button class="btn-option"></button>'.repeat(size * size);
   document.querySelector('.container').style.gridTemplateColumns = `repeat(${sizeBoard},1fr)`;
-  document.querySelector('.container').style.gridGap = `${1}vmin`;
+  document.querySelector('.container').style.gridGap = `${10/sizeBoard}vmin`;
   btnBoard = document.querySelectorAll('.btn-option');
   for (i = 0; i < btnBoard.length; i++) {
-    btnBoard[i].style.width = `${6}vmin`;
-    btnBoard[i].style.height = `${6}vmin`;
-    btnBoard[i].style.fontSize = `${5}vmin`;
+    btnBoard[i].style.width = `${50/sizeBoard}vmin`;
+    btnBoard[i].style.height = `${50/sizeBoard}vmin`;
+    btnBoard[i].style.fontSize = `${35/sizeBoard}vmin`;
   }
 }
 
-let sizeBoard = valueSelect.options[valueSelect.selectedIndex].value;
-newField(sizeBoard);
-rows = getRows(btnBoard);
-cols = getColumns(btnBoard);
-diag1 = getDiagonals1(rows);
-diag2 = getDiagonals2(rows);
-winArr = rows.concat(cols, diag1, diag2);
+
+
 //function get rows
 function getRows(arr) {
   let rows = [];
@@ -69,7 +76,6 @@ function getColumns(arr) {
   }
   return cols;
 }
-
 
 
 //function get diagonal
@@ -178,25 +184,25 @@ btnNewGame.addEventListener('click', () => {
   enableButtons();
 });
 
-
-btnBoard.forEach((element) => {
-  console.log(element)
-  element.addEventListener('click', () => {
-    if (flagX) {
-      flagX = false;
-      element.textContent = 'X';
-      element.disabled = true;
-    } else {
-      flagX = true;
-      element.textContent = 'O';
-      element.disabled = true;
-    }
-    counter++;
-    if (counter === btnBoard.length) {
-      drawFunction();
-    }
-    findWinner(winArr);
+function move() {
+  btnBoard.forEach((element) => {
+    element.addEventListener('click', () => {
+      if (flagX) {
+        flagX = false;
+        element.textContent = 'X';
+        element.disabled = true;
+      } else {
+        flagX = true;
+        element.textContent = 'O';
+        element.disabled = true;
+      }
+      counter++;
+      if (counter === btnBoard.length) {
+        drawFunction();
+      }
+      findWinner(winArr);
+    });
   });
-});
+}
 
 window.onload = enableButtons;
